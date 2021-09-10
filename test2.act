@@ -1,0 +1,64 @@
+actor A(5){
+	knownactors {
+		B b;
+	}
+
+	actorvars {
+		int i;
+		int j;
+		int k;
+		boolean o1;
+		boolean o2;
+	}
+
+	msghandler initial() {
+
+	}
+
+    msghandler forTest(int k){
+        for(i=0; i < 5; i = i + 1){
+            if(i == 4){
+                j = j*k;
+            }
+            for(j=0;j<9;j= j+1){
+                if(k==6){
+                    break;
+                }
+                o1 = (i==j);
+                continue;
+                for(k=10;k>6;k = k-1){
+                    if(k == 8){
+                        continue;
+                    }
+                    else{
+                        o1 = !o1;
+                    }
+                }
+                o1 = o1 && o1;
+                continue;
+            }
+            break;
+        }
+    }
+}
+
+actor B(2){
+	knownactors {
+		A a;
+	}
+
+	actorvars {
+	    int i;
+	    int j;
+	}
+
+	msghandler initial() {
+    	j = i--;
+    	i = ++j;
+    }
+}
+
+main {
+	A a(b):();
+	B b(a):();
+}

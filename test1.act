@@ -1,0 +1,65 @@
+actor A(5){
+	knownactors {
+		B b;
+	}
+
+	actorvars {
+		int i;
+		int j;
+		int k;
+		boolean o1;
+		boolean o2;
+	}
+
+	msghandler initial() {
+
+	}
+	msghandler decIncTest(int i, int j){
+        j = i++;
+        i = --j;
+    }
+	msghandler notTest(boolean o1){
+	    o1 = !o2;
+        o1 = !o1;
+	}
+	msghandler minusTest(int k){
+        i = -k;
+        i = -j;
+    }
+    msghandler binaryTest(int e1, int e2, int e3, boolean w1, boolean w2){
+        e1 = i * j - e3 + i / e1 % 9;
+        w1 = w1 && o1 || w2;
+        w2 = i > j;
+        o1 = k < e2;
+        w2 = (w1 == w2);
+        o2 = (w1 != o2);
+        i = -k;
+        i = -j;
+    }
+    msghandler forTest(int k){
+        for(i=0; i < 5; i = i + 1){
+            j = j*k;
+        }
+    }
+}
+
+actor B(2){
+	knownactors {
+		A a;
+	}
+
+	actorvars {
+	    int i;
+	    int j;
+	}
+
+	msghandler initial() {
+    	j = i--;
+    	i = ++j;
+    }
+}
+
+main {
+	A a(b):();
+	B b(a):();
+}

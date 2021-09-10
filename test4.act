@@ -1,0 +1,48 @@
+actor A(5){
+	knownactors {
+		B b;
+	}
+
+	actorvars {
+		int i;
+		int j[10];
+		int counter;
+	}
+
+	msghandler initial(int num) {
+	    int array[10];
+		i = 2;
+        counter = num;
+        for(counter=num-1; counter > -1; counter = counter-1){
+            j[counter] = counter * 10;
+        }
+        array = j;
+        b.foo(array);
+	}
+
+	msghandler bar(int i){
+		print(i);
+		sender.foo(i+1);
+	}
+}
+
+actor B(2){
+	knownactors {
+		A a;
+	}
+
+	actorvars {
+	    int j;
+	}
+
+	msghandler foo(int i[10]) {
+        for(j=0; j < 10; j=j+1){
+            print(i[j]);
+        }
+	}
+}
+
+main {
+	A a(b):(10);
+	B b(a):();
+}
